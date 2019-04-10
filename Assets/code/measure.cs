@@ -6,6 +6,7 @@ using System.IO.Ports;
 public class measure : MonoBehaviour
 {
     public GameObject ship;
+    public Rigidbody bullet;
     SerialPort serial;
     float roll = 0.0f;
     float pitch = 0.0f;
@@ -36,6 +37,12 @@ public class measure : MonoBehaviour
         else
         {
             Debug.Log("Oh FUck");
+        }
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Rigidbody bullet_clone;
+            bullet_clone = Instantiate(bullet, ship.transform.position, ship.transform.rotation);
+            bullet_clone.velocity = transform.TransformDirection(Vector3.forward * 10);
         }
     }
 }
