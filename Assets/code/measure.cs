@@ -6,25 +6,22 @@ using System.IO.Ports;
 public class measure : MonoBehaviour
 {
     public GameObject ship;
-    public Rigidbody bullet;
+    public GameObject bullet;
     SerialPort serial;
     float roll = 0.0f;
     float pitch = 0.0f;
     float x_dist = 0.0f;
     float y_dist = 0.0f;
-    Vector3 ship_pos;
 
     void Start()
     {
-        serial = new SerialPort("\\\\.\\COM3", 9600);
+        serial = new SerialPort("\\\\.\\COM6", 9600);
         serial.Open();
-        ship_pos = ship.transform.position;
     }
     void Update()
     {
         if (serial.IsOpen)
         {
-            Debug.Log(serial.ReadLine());
             string raw_reading = serial.ReadLine();
             string[] measurements = raw_reading.Split(',');
             roll = float.Parse(measurements[0]);
@@ -34,15 +31,12 @@ public class measure : MonoBehaviour
             ship.transform.eulerAngles = new Vector3(-roll, 0.0f, -pitch);
             ship.transform.Translate(x_dist * Time.deltaTime, y_dist*Time.deltaTime, 0.0f, Space.World);
         }
-        else
-        {
-            Debug.Log("Oh FUck");
-        }
         if (Input.GetButtonDown("Fire1"))
         {
-            Rigidbody bullet_clone;
+            GameObject bullet_clone;
             bullet_clone = Instantiate(bullet, ship.transform.position, ship.transform.rotation);
-            bullet_clone.velocity = transform.TransformDirection(Vector3.forward * 10);
+            bullet_clone.AddComponent<bullet>();
+            Debug.Log("Fire");
         }
     }
 }
