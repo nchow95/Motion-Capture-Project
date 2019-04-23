@@ -6,7 +6,7 @@ using System.IO.Ports;
 public class measure : MonoBehaviour
 {
     public GameObject ship;
-    public GameObject bullet;
+    public GameObject bullet_obj;
     SerialPort serial;
     float roll = 0.0f;
     float pitch = 0.0f;
@@ -72,7 +72,7 @@ public class measure : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             GameObject bullet_clone;
-            bullet_clone = Instantiate(bullet, ship.transform.position, ship.transform.rotation);
+            bullet_clone = Instantiate(bullet_obj, ship.transform.position, ship.transform.rotation);
             bullet_clone.AddComponent<bullet>();
             Debug.Log("Fire");
         }
