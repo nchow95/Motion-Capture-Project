@@ -16,7 +16,7 @@ public class measure : MonoBehaviour
 
     void Start()
     {
-        serial = new SerialPort("\\\\.\\COM6", 9600);
+        serial = new SerialPort("\\\\.\\COM3", 9600);
         serial.Open();
         sync_flag = false;
     }
