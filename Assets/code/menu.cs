@@ -13,12 +13,15 @@ public class menu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        keyboard.isOn = true;
+        controller.isOn = false;
+        data_obj.keyboard = true;
+        data_obj.controller = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     public void OnClick()
@@ -30,7 +33,6 @@ public class menu : MonoBehaviour
     {
         if(change.name == "Keyboard")
         {
-            Debug.Log("Keyboard Toggled");
             if (change.isOn)
             {
                 controller.isOn = false;
@@ -40,14 +42,13 @@ public class menu : MonoBehaviour
             else
             {
                 controller.isOn = true;
-                data_obj.controller = false;
-                data_obj.keyboard = true;
+                data_obj.controller = true;
+                data_obj.keyboard = false;
 
             }
         }
         if(change.name == "Controller")
         {
-            Debug.Log("Controller Toggled");
             if (change.isOn)
             {
                 keyboard.isOn = false;
